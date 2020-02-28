@@ -1,7 +1,16 @@
 # TupyStock
 
-Aplicação em Flutter com objetivo de controlar o estoque e a quantidade de vendas de um estabelecimento a cada dia, por cada vendedor, de forma que o gerente consiga ter uma visão ampla da quantidade de vendas e estoque, criando filtros de vendas por vendedores, por produtos mais vendidos, etc.
+A new Flutter project.
 
-Tecnologias envolvidas:
-- **Flutter - Dart**
-- **Firebase**
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
