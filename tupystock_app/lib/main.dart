@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:tupystock_app/login_screen.dart';
 
-void main() {
-  runApp(MaterialApp(
-      title: "Teste do 0",
-      home: Container(
-        color: Colors.blueGrey,
-        alignment: AlignmentDirectional(0.0, 0.0),
-        child: Container(
-          color: Colors.greenAccent,
-          child: Text("Teste"),
-          constraints: BoxConstraints(
-              maxHeight: 300.0,
-              maxWidth: 200.0,
-              minWidth: 150.0,
-              minHeight: 150.0
-          ),
-        ),
+void main() => runApp(MyApp());
 
-
-      )
-
-  ));
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Tupy Stock',
+      theme: ThemeData(primarySwatch: Colors.blueAccent[0xFF2979FF],),
+      home: LoginPage(),
+    );
+  }
 }
+
+
