@@ -5,3 +5,10 @@ Aplicação em Flutter com objetivo de controlar o estoque e a quantidade de ven
 Tecnologias envolvidas:
 - **Flutter - Dart**
 - **Firebase**
+
+
+
+## Telas
+
+Tela de Login:
+![home](https://github.com/willyamcts/TupyStock/blob/master/login_page.png)
