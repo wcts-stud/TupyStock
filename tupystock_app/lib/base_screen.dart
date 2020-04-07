@@ -56,7 +56,7 @@ class _TelaBaseState extends State<TelaBase>
                     child: Padding(
                       padding: EdgeInsets.only(left: 15.0, top: 45, bottom: 80, right: 5),
                       child: Text(
-                        'Cadastro do vendedor',
+                        'Cadastro da Venda',
                         style: TextStyle(
                           fontSize: 20,
                           color: Color.fromRGBO(87, 84, 244, 1),
