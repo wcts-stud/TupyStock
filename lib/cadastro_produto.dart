@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+
+final _formKey = GlobalKey<FormState>();
+var categories = ['Bebida', 'Comida'];
+String dropdownValue = categories[0];
+
 class BaseCadastroProduto extends StatefulWidget {
   @override
   _BasePageCadastroProduto createState() => _BasePageCadastroProduto();
@@ -20,9 +25,6 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
     _scrollViewController.dispose();
     super.dispose();
   }
-
-  final _formKey = GlobalKey<FormState>();
-  String dropdownValue = 'Bebida';
 
   @override
   Widget build(BuildContext context) {
@@ -110,52 +112,57 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                             keyboardType: TextInputType.numberWithOptions()),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 15, bottom: 15, left: 15, right: 15),
-                        child: DropdownButton<String>(
+                        padding: EdgeInsets.only(top: 15, bottom: 55, left: 15),
+                        child: DropdownButtonFormField<String>(
                           value: dropdownValue,
+                          items: categories.map((String v) {
+                            return new DropdownMenuItem<String>(
+                              child: SizedBox(
+                                width: 305,
+                                child: new Text(v, textAlign: TextAlign.center,),
+                              ),
+                              value: v,
+                            );
+                          }).toList(),
                           onChanged: (String newValue) {
                             setState(() {
                               dropdownValue = newValue;
+                              print("Valor do Dropdown: $dropdownValue");
                             });
                           },
-                          items: <String>['Bebida', 'Comida']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
+
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 18,
+                            wordSpacing: 2,
+                          ),
+
+                          decoration: InputDecoration(
+                              alignLabelWithHint: true,
+                              labelText: "Categoria do Produto",
+                              labelStyle: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black54,
+                              )
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: RaisedButton(
-                          onPressed: () {
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
-                            if (_formKey.currentState.validate()) {
-                              // Process data.
-                            }
-                          },
-                          child: Text('Submit'),
-                        ),
-                      ),
+// BOTÃO PADRÃO DO FORM PARA O SUBMIT, VERIFICAR SE É NECESSÁRIO OU NÃO
+//                      Padding(
+//                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+//                        child: RaisedButton(
+//                          onPressed: () {
+//                            // Validate will return true if the form is valid, or false if
+//                            // the form is invalid.
+//                            if (_formKey.currentState.validate()) {
+//                              // Process data.
+//                            }
+//                          },
+//                          child: Text('Submit'),
+//                        ),
+//                      ),
                     ],
                   ),
-                ),
-              ),
-              Center(
-                child: Icon(
-                  Icons.list,
-                  color: Colors.red,
-                  size: 200,
-                ),
-              ),
-              Center(
-                child: Icon(
-                  Icons.list,
-                  color: Colors.blue,
-                  size: 200,
                 ),
               ),
               Center(
