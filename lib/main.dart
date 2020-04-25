@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Tupy Stock',
       theme: ThemeData(primarySwatch: Colors.blueAccent[0xFF2979FF],),
       debugShowCheckedModeBanner: false,
-      home: TelaBase(),
+      home: LoginPage(),
     );
   }
 }
