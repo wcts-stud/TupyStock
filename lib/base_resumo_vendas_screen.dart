@@ -5,6 +5,7 @@ class BasePageVendas extends StatefulWidget {
   _BasePageState createState() => _BasePageState();
 }
 
+
 class _BasePageState extends State<BasePageVendas>
     with SingleTickerProviderStateMixin {
   ScrollController _scrollViewController;
@@ -20,6 +21,11 @@ class _BasePageState extends State<BasePageVendas>
     _scrollViewController.dispose();
     super.dispose();
   }
+
+
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -66,31 +72,95 @@ class _BasePageState extends State<BasePageVendas>
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              //Adicionar os Widget necessarios para a contrução do corpo da tela
+              //Adicionar os Widget necessarios para a contrução do corpo da tela 
               Padding(
                 padding: EdgeInsets.only( top: 40, bottom: 20),
                   child: Text(
-                    'Tabelas do resumo de venda',
+                    'Resumo de venda',
                       style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
                     ),
                   ),
               ),
-              Center(
-                child: Icon(
-                  Icons.list ,
-                  color: Colors.red,
-                  size: 200,
-                ),
+
+
+      Center(
+            child: Column(children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(10),
+              child: DataTable(
+                 columns: const <DataColumn>[
+      DataColumn(
+        label: Text(
+          'Produto',
+        ),
+      ),
+      DataColumn(
+        label: Text(
+          'Quantidade',
+        ),
+      ),
+      DataColumn(
+        label: Text(
+          'Preço',
+        ),
+      ),
+    ],
+    rows: const <DataRow>[
+      DataRow(
+        cells: <DataCell>[
+          DataCell(Text('Coca')),
+          DataCell(Text('1')),
+          DataCell(Text('R\$10')),
+        ],
+      ),
+       DataRow(
+        cells: <DataCell>[
+          DataCell(Text('Coxinha')),
+          DataCell(Text('2')),
+          DataCell(Text('R\$12')),
+        ],
+      ),
+      DataRow(
+        cells: <DataCell>[
+          DataCell(Text('')),
+          DataCell(Text('Total')),
+          DataCell(Text('R\$22')),
+        ],
+      ),
+    ],
               ),
-              Center(
-                child: Icon(
-                  Icons.list ,
-                  color: Colors.blue,
-                  size: 200,
-                ),
+            ),
+            
+             Container(
+              margin: EdgeInsets.all(10),
+              child: DataTable(
+                 columns: const <DataColumn>[
+      DataColumn(
+        label: Text(
+          'Recebido',
+        ),
+      ),
+      DataColumn(
+        label: Text(
+          'Troco',
+        ),
+      ),
+    ],
+    rows: const <DataRow>[
+      DataRow(
+        cells: <DataCell>[
+          DataCell(Text('R\$30')),
+          DataCell(Text('R\$8')),
+        ],
+      ),
+    ],
               ),
+            )])
+           ),
+
+           
               Center(
                 child: new ButtonBar(
                   mainAxisSize: MainAxisSize.min, // this will take space as minimum as posible(to center),
@@ -98,20 +168,20 @@ class _BasePageState extends State<BasePageVendas>
                   buttonMinWidth: 150,
                   children: <Widget>[
                     new RaisedButton(
-                      child: new Text('Cancelar',
+                      child: new Text('Voltar',
                           style: new TextStyle(color: Colors.white)),
                       onPressed: () {
-                        print('Cancelado');
+                        print('Voltar');
                       },
                       shape: new RoundedRectangleBorder(borderRadius:
                       new BorderRadius.circular(20.0)),
                       color: Colors.redAccent,
                     ),
                     new RaisedButton(
-                      child: new Text('Cadastrar',
+                      child: new Text('Novo Pedido',
                           style: new TextStyle(color: Colors.white)),
                       onPressed: () {
-                        print('Cadastrado');
+                        print('Novo Pedido');
                       },
                       shape: new RoundedRectangleBorder(borderRadius:
                       new BorderRadius.circular(20.0)),
