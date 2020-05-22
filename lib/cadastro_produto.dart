@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 final _formKey = GlobalKey<FormState>();
 var categories = ['Bebida', 'Comida'];
 String dropdownValue = categories[0];
+
 
 class BaseCadastroProduto extends StatefulWidget {
   @override
@@ -12,7 +15,18 @@ class BaseCadastroProduto extends StatefulWidget {
 
 class _BasePageCadastroProduto extends State<BaseCadastroProduto>
     with SingleTickerProviderStateMixin {
+  File _image;
   ScrollController _scrollViewController;
+
+
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   void initState() {
@@ -115,11 +129,14 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         padding: EdgeInsets.only(top: 15, bottom: 55, left: 15),
                         child: DropdownButtonFormField<String>(
                           value: dropdownValue,
-                          items: categories.map((String v) {
+                          items:  categories.map((String v) {
                             return new DropdownMenuItem<String>(
                               child: SizedBox(
-                                width: 305,
-                                child: new Text(v, textAlign: TextAlign.center,),
+                                width: 250,
+                                child: new Text(
+                                  v,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                               value: v,
                             );
@@ -130,23 +147,21 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                               print("Valor do Dropdown: $dropdownValue");
                             });
                           },
-
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: 18,
                             wordSpacing: 2,
                           ),
-
                           decoration: InputDecoration(
                               alignLabelWithHint: true,
                               labelText: "Categoria do Produto",
                               labelStyle: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
-                              )
-                          ),
+                              )),
                         ),
                       ),
+
 // BOTÃO PADRÃO DO FORM PARA O SUBMIT, VERIFICAR SE É NECESSÁRIO OU NÃO
 //                      Padding(
 //                        padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -163,6 +178,25 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
 //                      ),
                     ],
                   ),
+                ),
+              ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 30, left: 15),
+              child: Text('Adicione uma imagem para o produto:'),
+            ),
+              Padding(
+                padding: EdgeInsets.only( bottom: 5),
+                child: _image == null
+                    ?
+                  Text('No image selected.')
+                    : Image.file(_image),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 15, bottom: 55, left: 15),
+                child: FloatingActionButton(
+                  onPressed: getImage,
+                  tooltip: 'Pick Image',
+                  child: Icon(Icons.add_a_photo),
                 ),
               ),
               Center(
