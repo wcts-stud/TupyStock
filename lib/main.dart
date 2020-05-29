@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tupystock_app/login_screen.dart';
 import 'package:tupystock_app/base_screen.dart';
 import 'package:tupystock_app/base_resumo_vendas_screen.dart';
+import 'package:tupystock_app/cadastro_produto.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Tupy Stock',
       theme: ThemeData(primarySwatch: Colors.blueAccent[0xFF2979FF],),
       debugShowCheckedModeBanner: false,
-      home: TelaBase(),
+      home: BaseCadastroProduto(),
     );
   }
 }

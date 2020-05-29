@@ -17,6 +17,8 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
     with SingleTickerProviderStateMixin {
   File _image;
   ScrollController _scrollViewController;
+  final _formKey = GlobalKey<FormState>();
+  final Map<String, dynamic> formData = {'description': null, 'value': null, 'category' : null, 'image' : null};
 
 
 
@@ -25,6 +27,7 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
 
     setState(() {
       _image = image;
+      formData['image'] = image;
     });
   }
 
@@ -111,18 +114,36 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         padding: EdgeInsets.only(
                             top: 5, bottom: 15, left: 15, right: 15),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Informe um valor';
+                            }
+                            return null;
+                          },
                           decoration: const InputDecoration(
                             hintText: 'Descrição do Produto',
                           ),
+                          onSaved: (String value) {
+                            formData['description'] = value;
+                          },
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
                             top: 15, bottom: 15, left: 15, right: 15),
                         child: TextFormField(
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Informe um valor';
+                              }
+                              return null;
+                            },
                             decoration: const InputDecoration(
                               hintText: 'Valor Unitário',
                             ),
+                            onSaved: (String value) {
+                              formData['value'] = value;
+                            },
                             keyboardType: TextInputType.numberWithOptions()),
                       ),
                       Padding(
@@ -145,6 +166,7 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                             setState(() {
                               dropdownValue = newValue;
                               print("Valor do Dropdown: $dropdownValue");
+                              formData['category'] = dropdownValue;
                             });
                           },
                           style: TextStyle(
@@ -217,11 +239,17 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                       color: Colors.redAccent,
                     ),
                     new RaisedButton(
-                      child: new Text('Cadastrar',
-                          style: new TextStyle(color: Colors.white)),
+
                       onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save(); //onSaved is called!
+                          print(formData);
+                        }
                         print('Cadastrado');
                       },
+                      child: new Text('Cadastrar',
+                          style: new TextStyle(color: Colors.white)),
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(20.0)),
                       color: Colors.green,
