@@ -90,7 +90,6 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              //Adicionar os Widget necessarios para a contrução do corpo da tela
               Padding(
                 padding:
                     EdgeInsets.only(top: 40, bottom: 5, left: 30, right: 30),
@@ -116,7 +115,7 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         child: TextFormField(
                           validator: (value) {
                             if (value.isEmpty) {
-                              return 'Informe um valor';
+                              return 'Este campo deve ser informado';
                             }
                             return null;
                           },
@@ -134,7 +133,7 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Informe um valor';
+                                return 'Este campo deve ser informado';
                               }
                               return null;
                             },
@@ -183,21 +182,6 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                               )),
                         ),
                       ),
-
-// BOTÃO PADRÃO DO FORM PARA O SUBMIT, VERIFICAR SE É NECESSÁRIO OU NÃO
-//                      Padding(
-//                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-//                        child: RaisedButton(
-//                          onPressed: () {
-//                            // Validate will return true if the form is valid, or false if
-//                            // the form is invalid.
-//                            if (_formKey.currentState.validate()) {
-//                              // Process data.
-//                            }
-//                          },
-//                          child: Text('Submit'),
-//                        ),
-//                      ),
                     ],
                   ),
                 ),
@@ -245,8 +229,8 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         if (_formKey.currentState.validate()) {
                           _formKey.currentState.save(); //onSaved is called!
                           print(formData);
+                          print('Cadastrado');
                         }
-                        print('Cadastrado');
                       },
                       child: new Text('Cadastrar',
                           style: new TextStyle(color: Colors.white)),
