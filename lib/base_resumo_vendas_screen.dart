@@ -163,16 +163,7 @@ class _BasePageState extends State<BasePageVendas>
                   buttonPadding: EdgeInsets.all(15),
                   buttonMinWidth: 150,
                   children: <Widget>[
-                    new RaisedButton(
-                      child: new Text('Voltar',
-                          style: new TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        print('Voltar');
-                      },
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(20.0)),
-                      color: Colors.redAccent,
-                    ),
+
                     new RaisedButton(
                       child: new Text('Novo Pedido',
                           style: new TextStyle(color: Colors.white)),
