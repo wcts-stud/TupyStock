@@ -23,7 +23,7 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
 
 
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = image;
