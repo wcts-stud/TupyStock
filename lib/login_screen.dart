@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tupystock_app/bebidas_screen.dart';
+import 'package:tupystock_app/services/authentication.dart';
 
 // https://medium.com/jlouage/container-de5b0d3ad184
 
@@ -103,9 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                             child: new Text('Entrar',
                                 style: new TextStyle(color: Colors.white)),
                             onPressed: () {
-                              Navigator.push(context,
+                              Services().authHttpJson();
+
+                              /*Navigator.push(context,
                                   MaterialPageRoute(
                                       builder: (context) => ListaBebidas()));
+                               */
                             },
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(20.0)),
