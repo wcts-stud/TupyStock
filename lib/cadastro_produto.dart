@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 final _formKey = GlobalKey<FormState>();
 var categories = ['Bebida', 'Comida'];
 String dropdownValue = categories[0];
+
 
 class BaseCadastroProduto extends StatefulWidget {
   @override
@@ -12,7 +15,21 @@ class BaseCadastroProduto extends StatefulWidget {
 
 class _BasePageCadastroProduto extends State<BaseCadastroProduto>
     with SingleTickerProviderStateMixin {
+  File _image;
   ScrollController _scrollViewController;
+  final _formKey = GlobalKey<FormState>();
+  final Map<String, dynamic> formData = {'description': null, 'value': null, 'category' : null, 'image' : null};
+
+
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+      formData['image'] = image;
+    });
+  }
 
   @override
   void initState() {
@@ -73,7 +90,6 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              //Adicionar os Widget necessarios para a contrução do corpo da tela
               Padding(
                 padding:
                     EdgeInsets.only(top: 40, bottom: 5, left: 30, right: 30),
@@ -97,29 +113,50 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                         padding: EdgeInsets.only(
                             top: 5, bottom: 15, left: 15, right: 15),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Este campo deve ser informado';
+                            }
+                            return null;
+                          },
                           decoration: const InputDecoration(
                             hintText: 'Descrição do Produto',
                           ),
+                          onSaved: (String value) {
+                            formData['description'] = value;
+                          },
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
                             top: 15, bottom: 15, left: 15, right: 15),
                         child: TextFormField(
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Este campo deve ser informado';
+                              }
+                              return null;
+                            },
                             decoration: const InputDecoration(
                               hintText: 'Valor Unitário',
                             ),
+                            onSaved: (String value) {
+                              formData['value'] = value;
+                            },
                             keyboardType: TextInputType.numberWithOptions()),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 15, bottom: 55, left: 15),
                         child: DropdownButtonFormField<String>(
                           value: dropdownValue,
-                          items: categories.map((String v) {
+                          items:  categories.map((String v) {
                             return new DropdownMenuItem<String>(
                               child: SizedBox(
-                                width: 305,
-                                child: new Text(v, textAlign: TextAlign.center,),
+                                width: 250,
+                                child: new Text(
+                                  v,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                               value: v,
                             );
@@ -128,41 +165,44 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                             setState(() {
                               dropdownValue = newValue;
                               print("Valor do Dropdown: $dropdownValue");
+                              formData['category'] = dropdownValue;
                             });
                           },
-
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: 18,
                             wordSpacing: 2,
                           ),
-
                           decoration: InputDecoration(
                               alignLabelWithHint: true,
                               labelText: "Categoria do Produto",
                               labelStyle: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black54,
-                              )
-                          ),
+                              )),
                         ),
                       ),
-// BOTÃO PADRÃO DO FORM PARA O SUBMIT, VERIFICAR SE É NECESSÁRIO OU NÃO
-//                      Padding(
-//                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-//                        child: RaisedButton(
-//                          onPressed: () {
-//                            // Validate will return true if the form is valid, or false if
-//                            // the form is invalid.
-//                            if (_formKey.currentState.validate()) {
-//                              // Process data.
-//                            }
-//                          },
-//                          child: Text('Submit'),
-//                        ),
-//                      ),
                     ],
                   ),
+                ),
+              ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 30, left: 15),
+              child: Text('Adicione uma imagem para o produto:'),
+            ),
+              Padding(
+                padding: EdgeInsets.only( bottom: 5),
+                child: _image == null
+                    ?
+                  Text('No image selected.')
+                    : Image.file(_image),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 15, bottom: 55, left: 15),
+                child: FloatingActionButton(
+                  onPressed: getImage,
+                  tooltip: 'Pick Image',
+                  child: Icon(Icons.add_a_photo),
                 ),
               ),
               Center(
@@ -183,11 +223,17 @@ class _BasePageCadastroProduto extends State<BaseCadastroProduto>
                       color: Colors.redAccent,
                     ),
                     new RaisedButton(
+
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save(); //onSaved is called!
+                          print(formData);
+                          print('Cadastrado');
+                        }
+                      },
                       child: new Text('Cadastrar',
                           style: new TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        print('Cadastrado');
-                      },
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(20.0)),
                       color: Colors.green,
