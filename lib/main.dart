@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tupystock_app/login_screen.dart';
-import 'package:tupystock_app/base_screen.dart';
-import 'package:tupystock_app/base_resumo_vendas_screen.dart';
+import 'package:tupystock_app/principal_comida_bebida.dart';
+//import 'package:tupystock_app/cadastro_de_vendas.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tupy Stock',
-      theme: ThemeData(primarySwatch: Colors.blueAccent[0xFF2979FF],),
+      //theme: ThemeData(primarySwatch: Colors.blueAccent[0xFF2979FF],),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: TelaBase(),
     );
   }
 }
