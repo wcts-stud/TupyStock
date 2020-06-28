@@ -45,6 +45,12 @@ flutter:
   assets:
     - assets/images/
     - assets/tupy-schroeder-sc.gif
+    - assets/agua.png
+    - assets/coca.png
+    - assets/cerveja.png
+    - assets/coxinha.png
+    - assets/pastel.png
+    - assets/pao-de-queijo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
